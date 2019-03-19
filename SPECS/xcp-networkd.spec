@@ -1,11 +1,11 @@
 Name:           xcp-networkd
-Version:        0.29.0
-Release:        1%{?dist}
+Version:        0.34.0
+Release:        3%{?dist}
 Summary:        Simple host network management service for the xapi toolstack
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-networkd
 Source0:        https://code.citrite.net/rest/archive/latest/projects/XSU/repos/%{name}/archive?at=v%{version}&format=tar.gz&prefix=%{name}-%{version}#/%{name}-%{version}.tar.gz
-Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-networkd/archive?at=v0.29.0&format=tar.gz&prefix=xcp-networkd-0.29.0#/xcp-networkd-0.29.0.tar.gz) = 5cacb077d199a6c2749c9d3695f6a177a9f02872
+Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-networkd/archive?at=v0.34.0&format=tar.gz&prefix=xcp-networkd-0.34.0#/xcp-networkd-0.34.0.tar.gz) = 2a690a4ecfb22a7f3a81ba464ff5645308fca2d1
 Source1:        xcp-networkd.service
 Source2:        xcp-networkd-sysconfig
 Source3:        xcp-networkd-conf
@@ -62,6 +62,21 @@ make install DESTDIR=%{buildroot} BINDIR=%{_bindir} SBINDIR=%{_sbindir}
 %systemd_postun xcp-networkd.service
 
 %changelog
+* Thu Jun 28 2018 Christian Lindig <christian.lindig@citrix.com> - 0.34.0-1
+- network_monitor_thread: use Xmlrpc_client instead of Rpc_client
+
+* Tue Jun 26 2018 Christian Lindig <christian.lindig@citrix.com> - 0.33.0-1
+- CA-291197: Toolstack no longer ignores junk at the end of JSON-RPC response
+
+* Fri Jun 15 2018 Christian Lindig <christian.lindig@citrix.com> - 0.32.0-1
+- CA-291495: Fall back to Ip.link_set_mtu if OVS.set_mtu fails
+
+* Tue Jun 05 2018 Christian Lindig <christian.lindig@citrix.com> - 0.31.0-1
+- CA-236855: VM.clean_shutdown task not completing on slave
+
+* Mon May 14 2018 Christian Lindig <christian.lindig@citrix.com> - 0.30.0-1
+- network_utils: reduce warnings
+
 * Mon Apr 09 2018 Christian Lindig <christian.lindig@citrix.com> - 0.29.0-1
 - CA-287340: Slave reboot with unexpect enabled SRIOV.
 
