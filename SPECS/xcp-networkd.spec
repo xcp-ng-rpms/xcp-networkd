@@ -1,16 +1,20 @@
 Name:           xcp-networkd
-Version:        0.34.0
-Release:        3%{?dist}
+Version:        0.44.0
+Release:        1%{?dist}
 Summary:        Simple host network management service for the xapi toolstack
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-networkd
-Source0:        https://code.citrite.net/rest/archive/latest/projects/XSU/repos/%{name}/archive?at=v%{version}&format=tar.gz&prefix=%{name}-%{version}#/%{name}-%{version}.tar.gz
-Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-networkd/archive?at=v0.34.0&format=tar.gz&prefix=xcp-networkd-0.34.0#/xcp-networkd-0.34.0.tar.gz) = 2a690a4ecfb22a7f3a81ba464ff5645308fca2d1
-Source1:        xcp-networkd.service
-Source2:        xcp-networkd-sysconfig
-Source3:        xcp-networkd-conf
-Source4:        xcp-networkd-network-conf
-Source5:        init-xcp-networkd
+
+Source0: https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-networkd/archive?at=v0.44.0&format=tar.gz&prefix=xcp-networkd-0.44.0#/xcp-networkd-0.44.0.tar.gz
+Source1: SOURCES/xcp-networkd/xcp-networkd.service
+Source2: SOURCES/xcp-networkd/xcp-networkd-sysconfig
+Source3: SOURCES/xcp-networkd/xcp-networkd-conf
+Source4: SOURCES/xcp-networkd/xcp-networkd-network-conf
+Source5: SOURCES/xcp-networkd/init-xcp-networkd
+
+
+Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-networkd/archive?at=v0.44.0&format=tar.gz&prefix=xcp-networkd-0.44.0#/xcp-networkd-0.44.0.tar.gz) = 946a967bfd018b48dc7f7e9af86b73528ec3edde
+
 BuildRequires:  libffi-devel
 BuildRequires:  xs-opam-repo
 BuildRequires:  forkexecd-devel
@@ -62,6 +66,47 @@ make install DESTDIR=%{buildroot} BINDIR=%{_bindir} SBINDIR=%{_sbindir}
 %systemd_postun xcp-networkd.service
 
 %changelog
+* Fri Feb 22 2019 Christian Lindig <christian.lindig@citrix.com> - 0.44.0-1
+- CA-311211: Fix destroy_existing_vlan_bridge when enic workaround is enabled
+
+* Fri Feb 15 2019 Christian Lindig <christian.lindig@citrix.com> - 0.43.0-1
+- CA-310413: Unconditionally apply enic workaround (again)
+
+* Wed Feb 13 2019 Christian Lindig <christian.lindig@citrix.com> - 0.42.0-1
+- CA-310516: Detect 'xentemp' vlans as managed
+- CA-310516: Define name of temporary vlan only once
+
+* Mon Jan 07 2019 Christian Lindig <christian.lindig@citrix.com> - 0.41.0-1
+- CA-305355: Bumping dracut timeout default up to 3min for 4.19 kernel
+- Use OCaml 4.07 for Travis
+
+* Mon Dec 10 2018 Christian Lindig <christian.lindig@citrix.com> - 0.40.0-1
+- CP-27898 remove dead code, port to Dune, fix warnings, update Travis
+
+* Tue Dec 04 2018 Christian Lindig <christian.lindig@citrix.com> - 0.39.0-1
+- Moved from jbuilder to dune and deprecated xcp and xcp-inventory in
+  favour of xapi-idl and xapi-invenotry respectively.
+
+* Fri Nov 30 2018 Christian Lindig <christian.lindig@citrix.com> - 0.38.0-1
+- CA-303529/CA-287657: Immediately setup management on first boot
+
+* Fri Nov 16 2018 Christian Lindig <christian.lindig@citrix.com> - 0.37.0-1
+- New ocaml-rpc
+
+* Thu Oct 11 2018 Rob Hoes <rob.hoes@citrix.com> - 0.36.0-1
+- Refine SR-IOV log
+
+* Thu Oct 04 2018 Christian Lindig <christian.lindig@citrix.com> - 0.35.0-1
+- Reindent with spaces
+- Fix error reporting
+- Confirm that the interface exists before calling `ip`
+- Eliminate compiler warning 52
+- Remove log_successful_output from call_script
+- Add customisable handler for script errors
+- Handle bridge-does-not-exist errors from OVS
+- Do not log "get" commands
+- Do not apply IPv6 config if IPv6 is disabled
+
 * Thu Jun 28 2018 Christian Lindig <christian.lindig@citrix.com> - 0.34.0-1
 - network_monitor_thread: use Xmlrpc_client instead of Rpc_client
 
