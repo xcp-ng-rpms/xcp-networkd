@@ -1,11 +1,11 @@
 Name:           xcp-networkd
-Version:        0.44.0
+Version:        0.53.0
 Release:        1%{?dist}
 Summary:        Simple host network management service for the xapi toolstack
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-networkd
 
-Source0: https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-networkd/archive?at=v0.44.0&format=tar.gz&prefix=xcp-networkd-0.44.0#/xcp-networkd-0.44.0.tar.gz
+Source0: https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-networkd/archive?at=v0.53.0&format=tar.gz&prefix=xcp-networkd-0.53.0#/xcp-networkd-0.53.0.tar.gz
 Source1: SOURCES/xcp-networkd/xcp-networkd.service
 Source2: SOURCES/xcp-networkd/xcp-networkd-sysconfig
 Source3: SOURCES/xcp-networkd/xcp-networkd-conf
@@ -13,7 +13,7 @@ Source4: SOURCES/xcp-networkd/xcp-networkd-network-conf
 Source5: SOURCES/xcp-networkd/init-xcp-networkd
 
 
-Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-networkd/archive?at=v0.44.0&format=tar.gz&prefix=xcp-networkd-0.44.0#/xcp-networkd-0.44.0.tar.gz) = 946a967bfd018b48dc7f7e9af86b73528ec3edde
+Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-networkd/archive?at=v0.53.0&format=tar.gz&prefix=xcp-networkd-0.53.0#/xcp-networkd-0.53.0.tar.gz) = e231cf37778945b46fb900f11e808e6d86928e12
 
 BuildRequires:  libffi-devel
 BuildRequires:  xs-opam-repo
@@ -26,6 +26,7 @@ BuildRequires:  systemd-devel
 Requires:       ethtool
 Requires:       libnl3
 
+Requires:       jemalloc
 %{?systemd_requires}
 
 %description
@@ -36,6 +37,9 @@ Simple host networking management service for the xapi toolstack.
 
 %build
 make
+
+%check
+make test
 
 %install
 make install DESTDIR=%{buildroot} BINDIR=%{_bindir} SBINDIR=%{_sbindir}
@@ -66,6 +70,43 @@ make install DESTDIR=%{buildroot} BINDIR=%{_bindir} SBINDIR=%{_sbindir}
 %systemd_postun xcp-networkd.service
 
 %changelog
+* Fri Nov 15 2019 Christian Lindig <christian.lindig@citrix.com> - 0.53.0-1
+- Ovs.create_bridge: whitespace in vsctl call
+- CA-329442: Avoid recreating bridges unless absolutely necessary
+
+* Fri Oct 04 2019 Christian Lindig <christian.lindig@citrix.com> - 0.52.0-1
+- Restart 'ip monitor address' process if it quitted
+
+* Fri Aug 23 2019 Edwin Török <edvin.torok@citrix.com> - 0.51.0-2
+- bump packages after xs-opam update
+
+* Thu Aug 15 2019 Christian Lindig <christian.lindig@citrix.com> - 0.51.0-1
+- CA-323765: preserve the "type" config when re-adding existing interfaces
+- CA-324959: do not loose DNS settings after a network reset
+
+* Fri Aug 02 2019 Christian Lindig <christian.lindig@citrix.com> - 0.50.0-1
+- Remove calls to obsolete network scripts
+
+* Mon Jul 29 2019 Christian Lindig <christian.lindig@citrix.com> - 0.49.0-1
+- CP-28368 Propagate test_highlevel ounit removal
+
+* Wed Jul 17 2019 Christian Lindig <christian.lindig@citrix.com> - 0.48.0-1
+- CA-323523: Ensure that dhclients get restarted when gateway/DNS changes
+- CA-323523: Restrict the interface of the `Dhclient` module
+- CA-323523: Always stop any dhclient process before destroying a bridge
+
+* Mon Jul 01 2019 Christian Lindig <christian.lindig@citrix.com> - 0.47.0-1
+- Extend the naughty DHCP-server workaround to DNS
+
+* Fri Jun 21 2019 Christian Lindig <christian.lindig@citrix.com> - 0.46.0-1
+- CA-320563: re-submit for missing change on regex
+
+* Wed Jun 12 2019 Christian Lindig <christian.lindig@citrix.com> - 0.45.0-2
+- remove obsolete SOURCES/xcp-networkd-init
+
+* Tue Jun 11 2019 Christian Lindig <christian.lindig@citrix.com> - 0.45.0-1
+- CA-320563: xcp-networkd: fix the regex match for PCI BDF string
+
 * Fri Feb 22 2019 Christian Lindig <christian.lindig@citrix.com> - 0.44.0-1
 - CA-311211: Fix destroy_existing_vlan_bridge when enic workaround is enabled
 
