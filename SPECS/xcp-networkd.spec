@@ -1,6 +1,6 @@
 Name:           xcp-networkd
 Version:        0.53.0
-Release:        1%{?dist}
+Release:        1.1%{?dist}
 Summary:        Simple host network management service for the xapi toolstack
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-networkd
@@ -11,6 +11,9 @@ Source2: SOURCES/xcp-networkd/xcp-networkd-sysconfig
 Source3: SOURCES/xcp-networkd/xcp-networkd-conf
 Source4: SOURCES/xcp-networkd/xcp-networkd-network-conf
 Source5: SOURCES/xcp-networkd/init-xcp-networkd
+
+# XCP-ng patches
+Patch1000: xcp-networkd-0.53.0-dhcp-send-hostname-to-server.backport.patch
 
 
 Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-networkd/archive?at=v0.53.0&format=tar.gz&prefix=xcp-networkd-0.53.0#/xcp-networkd-0.53.0.tar.gz) = e231cf37778945b46fb900f11e808e6d86928e12
@@ -70,6 +73,9 @@ make install DESTDIR=%{buildroot} BINDIR=%{_bindir} SBINDIR=%{_sbindir}
 %systemd_postun xcp-networkd.service
 
 %changelog
+* Thu Apr 16 2020 Samuel Verschelde <stormi-xcp@ylix.fr> - 0.53.0-1.1
+- Add xcp-networkd-0.53.0-dhcp-send-hostname-to-server.backport.patch
+
 * Fri Nov 15 2019 Christian Lindig <christian.lindig@citrix.com> - 0.53.0-1
 - Ovs.create_bridge: whitespace in vsctl call
 - CA-329442: Avoid recreating bridges unless absolutely necessary
