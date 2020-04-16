@@ -1,6 +1,6 @@
 Name:           xcp-networkd
 Version:        0.44.0
-Release:        1%{?dist}
+Release:        1.1%{?dist}
 Summary:        Simple host network management service for the xapi toolstack
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-networkd
@@ -11,6 +11,9 @@ Source2: SOURCES/xcp-networkd/xcp-networkd-sysconfig
 Source3: SOURCES/xcp-networkd/xcp-networkd-conf
 Source4: SOURCES/xcp-networkd/xcp-networkd-network-conf
 Source5: SOURCES/xcp-networkd/init-xcp-networkd
+
+# XCP-ng patches
+Patch1000: xcp-networkd-0.44.0-dhcp-send-hostname-to-server.backport.patch
 
 
 Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-networkd/archive?at=v0.44.0&format=tar.gz&prefix=xcp-networkd-0.44.0#/xcp-networkd-0.44.0.tar.gz) = 946a967bfd018b48dc7f7e9af86b73528ec3edde
@@ -66,6 +69,9 @@ make install DESTDIR=%{buildroot} BINDIR=%{_bindir} SBINDIR=%{_sbindir}
 %systemd_postun xcp-networkd.service
 
 %changelog
+* Thu Apr 16 2020 Samuel Verschelde <stormi-xcp@ylix.fr> - 0.44.0-1.1
+- Add xcp-networkd-0.44.0-dhcp-send-hostname-to-server.backport.patch
+
 * Fri Feb 22 2019 Christian Lindig <christian.lindig@citrix.com> - 0.44.0-1
 - CA-311211: Fix destroy_existing_vlan_bridge when enic workaround is enabled
 
