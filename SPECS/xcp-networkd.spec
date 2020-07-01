@@ -1,22 +1,19 @@
 Name:           xcp-networkd
-Version:        0.53.0
-Release:        1.1%{?dist}
+Version:        0.56.0
+Release:        1%{?dist}
 Summary:        Simple host network management service for the xapi toolstack
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-networkd
 
-Source0: https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-networkd/archive?at=v0.53.0&format=tar.gz&prefix=xcp-networkd-0.53.0#/xcp-networkd-0.53.0.tar.gz
+Source0: https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-networkd/archive?at=v0.56.0&format=tar.gz&prefix=xcp-networkd-0.56.0#/xcp-networkd-0.56.0.tar.gz
 Source1: SOURCES/xcp-networkd/xcp-networkd.service
 Source2: SOURCES/xcp-networkd/xcp-networkd-sysconfig
 Source3: SOURCES/xcp-networkd/xcp-networkd-conf
 Source4: SOURCES/xcp-networkd/xcp-networkd-network-conf
 Source5: SOURCES/xcp-networkd/init-xcp-networkd
 
-# XCP-ng patches
-Patch1000: xcp-networkd-0.53.0-dhcp-send-hostname-to-server.backport.patch
 
-
-Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-networkd/archive?at=v0.53.0&format=tar.gz&prefix=xcp-networkd-0.53.0#/xcp-networkd-0.53.0.tar.gz) = e231cf37778945b46fb900f11e808e6d86928e12
+Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-networkd/archive?at=v0.56.0&format=tar.gz&prefix=xcp-networkd-0.56.0#/xcp-networkd-0.56.0.tar.gz) = f302a883b2f2b2e549cec38c4b1d0578eae0e814
 
 BuildRequires:  libffi-devel
 BuildRequires:  xs-opam-repo
@@ -73,8 +70,15 @@ make install DESTDIR=%{buildroot} BINDIR=%{_bindir} SBINDIR=%{_sbindir}
 %systemd_postun xcp-networkd.service
 
 %changelog
-* Thu Apr 16 2020 Samuel Verschelde <stormi-xcp@ylix.fr> - 0.53.0-1.1
-- Add xcp-networkd-0.53.0-dhcp-send-hostname-to-server.backport.patch
+* Tue May 19 2020 Christian Lindig <christian.lindig@citrix.com> - 0.56.0-1
+- Maintenance: format code with ocamlformat
+- maintenance: format comments with ocamlformat
+
+* Tue Apr 14 2020 Christian Lindig <christian.lindig@citrix.com> - 0.55.0-1
+- Make dhclient send our hostname to the DHCP server
+
+* Thu Mar 12 2020 Christian Lindig <christian.lindig@citrix.com> - 0.54.0-1
+- Use common Travis CI configuration
 
 * Fri Nov 15 2019 Christian Lindig <christian.lindig@citrix.com> - 0.53.0-1
 - Ovs.create_bridge: whitespace in vsctl call
