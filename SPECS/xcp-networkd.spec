@@ -1,6 +1,6 @@
 Name:           xcp-networkd
 Version:        0.56.1
-Release:        3%{?dist}
+Release:        3.0.ipv6.1%{?dist}
 Summary:        Simple host network management service for the xapi toolstack
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-networkd
@@ -14,6 +14,10 @@ Source5: SOURCES/xcp-networkd/init-xcp-networkd
 
 
 Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-networkd/archive?at=v0.56.1&format=tar.gz&prefix=xcp-networkd-0.56.1#/xcp-networkd-0.56.1.tar.gz) = 25efb53055d6e994a95053a4b96f6576b9e5f907
+
+# XCP-ng specific sources and patches
+Patch1000: xcp-networkd-0.56.0-set-dns-ipv6.patch
+Patch1001: xcp-networkd-0.56.0-fix-dhcp6.patch
 
 BuildRequires:  libffi-devel
 BuildRequires:  xs-opam-repo
@@ -70,6 +74,11 @@ make install DESTDIR=%{buildroot} BINDIR=%{_bindir} SBINDIR=%{_sbindir}
 %systemd_postun xcp-networkd.service
 
 %changelog
+* Thu Feb 17 2022 Benjamin Reis <benjamin.reis@vates.fr> - 0.56.1-3.0.ipv6.1
+- Add IPv6 patches:
+- xcp-networkd-0.56.0-set-dns-ipv6.patch
+- xcp-networkd-0.56.0-fix-dhcp6.patch
+
 * Mon Sep 27 2021 Pau Ruiz Safont <pau.safont@citrix.com> - 0.56.1-3
 - Bump package after xs-opam update
 
