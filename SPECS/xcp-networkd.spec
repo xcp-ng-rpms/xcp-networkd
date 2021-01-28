@@ -15,6 +15,9 @@ Source5: SOURCES/xcp-networkd/init-xcp-networkd
 
 Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-networkd/archive?at=v0.56.0&format=tar.gz&prefix=xcp-networkd-0.56.0#/xcp-networkd-0.56.0.tar.gz) = f302a883b2f2b2e549cec38c4b1d0578eae0e814
 
+Patch1000: xcp-networkd-0.56.0-set-dns-ipv6.patch
+Patch1001: xcp-networkd-0.56.0-fix-dhcp6.patch
+
 BuildRequires:  libffi-devel
 BuildRequires:  xs-opam-repo
 BuildRequires:  forkexecd-devel
