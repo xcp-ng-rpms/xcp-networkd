@@ -1,6 +1,6 @@
 Name:           xcp-networkd
 Version:        0.56.0
-Release:        1.0.ipv6.1%{?dist}
+Release:        1.0.ipv6.2%{?dist}
 Summary:        Simple host network management service for the xapi toolstack
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-networkd
@@ -74,6 +74,9 @@ make install DESTDIR=%{buildroot} BINDIR=%{_bindir} SBINDIR=%{_sbindir}
 %systemd_postun xcp-networkd.service
 
 %changelog
+* Wed May 05 2021 Benjamin Reis <benjamin.reis@vates.fr> - 0.56.0-1.0.ipv6.2
+- Rebuild for IPv6: depends on ocaml-xen-api-client
+
 * Fri Jan 29 2021 Benjamin Reis <benjamin.reis@vates.fr> - 0.56.0-1.0.ipv6.1
 - Add IPv6 patches:
 - xcp-networkd-0.56.0-set-dns-ipv6.patch
