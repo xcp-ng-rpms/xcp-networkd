@@ -1,11 +1,11 @@
 Name:           xcp-networkd
-Version:        0.56.0
-Release:        1%{?dist}
+Version:        0.56.1
+Release:        3%{?dist}
 Summary:        Simple host network management service for the xapi toolstack
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-networkd
 
-Source0: https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-networkd/archive?at=v0.56.0&format=tar.gz&prefix=xcp-networkd-0.56.0#/xcp-networkd-0.56.0.tar.gz
+Source0: https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-networkd/archive?at=v0.56.1&format=tar.gz&prefix=xcp-networkd-0.56.1#/xcp-networkd-0.56.1.tar.gz
 Source1: SOURCES/xcp-networkd/xcp-networkd.service
 Source2: SOURCES/xcp-networkd/xcp-networkd-sysconfig
 Source3: SOURCES/xcp-networkd/xcp-networkd-conf
@@ -13,7 +13,7 @@ Source4: SOURCES/xcp-networkd/xcp-networkd-network-conf
 Source5: SOURCES/xcp-networkd/init-xcp-networkd
 
 
-Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-networkd/archive?at=v0.56.0&format=tar.gz&prefix=xcp-networkd-0.56.0#/xcp-networkd-0.56.0.tar.gz) = f302a883b2f2b2e549cec38c4b1d0578eae0e814
+Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-networkd/archive?at=v0.56.1&format=tar.gz&prefix=xcp-networkd-0.56.1#/xcp-networkd-0.56.1.tar.gz) = 25efb53055d6e994a95053a4b96f6576b9e5f907
 
 BuildRequires:  libffi-devel
 BuildRequires:  xs-opam-repo
@@ -70,6 +70,18 @@ make install DESTDIR=%{buildroot} BINDIR=%{_bindir} SBINDIR=%{_sbindir}
 %systemd_postun xcp-networkd.service
 
 %changelog
+* Mon Sep 27 2021 Pau Ruiz Safont <pau.safont@citrix.com> - 0.56.1-3
+- Bump package after xs-opam update
+
+* Mon Sep 27 2021 Pau Ruiz Safont <pau.safont@citrix.com> - 0.56.1-2
+- Bump packages after ocaml-xen-api-libs-transitional update
+
+* Mon Aug 23 2021 Pau Ruiz Safont <pau.safont@citrix.com> - 0.56.1-1
+- CP-3864: update for rpclib 7 compatibility
+
+* Tue Jul 13 2021 Edwin Török <edvin.torok@citrix.com> - 0.56.0-2
+- bump packages after xs-opam update
+
 * Tue May 19 2020 Christian Lindig <christian.lindig@citrix.com> - 0.56.0-1
 - Maintenance: format code with ocamlformat
 - maintenance: format comments with ocamlformat
