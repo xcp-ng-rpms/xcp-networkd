@@ -18,6 +18,7 @@ Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos
 # XCP-ng specific sources and patches
 Patch1000: xcp-networkd-0.56.0-set-dns-ipv6.patch
 Patch1001: xcp-networkd-0.56.0-fix-dhcp6.patch
+Patch1002: brs-ipv6.patch
 
 BuildRequires:  libffi-devel
 BuildRequires:  xs-opam-repo
