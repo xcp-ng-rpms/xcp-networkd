@@ -1,11 +1,11 @@
 Name:           xcp-networkd
-Version:        0.56.1
-Release:        3%{?dist}
+Version:        0.56.2
+Release:        1%{?dist}
 Summary:        Simple host network management service for the xapi toolstack
 License:        LGPL
 URL:            https://github.com/xapi-project/xcp-networkd
 
-Source0: https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-networkd/archive?at=v0.56.1&format=tar.gz&prefix=xcp-networkd-0.56.1#/xcp-networkd-0.56.1.tar.gz
+Source0: https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-networkd/archive?at=v0.56.2&format=tar.gz&prefix=xcp-networkd-0.56.2#/xcp-networkd-0.56.2.tar.gz
 Source1: SOURCES/xcp-networkd/xcp-networkd.service
 Source2: SOURCES/xcp-networkd/xcp-networkd-sysconfig
 Source3: SOURCES/xcp-networkd/xcp-networkd-conf
@@ -13,7 +13,7 @@ Source4: SOURCES/xcp-networkd/xcp-networkd-network-conf
 Source5: SOURCES/xcp-networkd/init-xcp-networkd
 
 
-Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-networkd/archive?at=v0.56.1&format=tar.gz&prefix=xcp-networkd-0.56.1#/xcp-networkd-0.56.1.tar.gz) = 25efb53055d6e994a95053a4b96f6576b9e5f907
+Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-networkd/archive?at=v0.56.2&format=tar.gz&prefix=xcp-networkd-0.56.2#/xcp-networkd-0.56.2.tar.gz) = 80e49a2d646ff96f7e4e90688dbb3f7be2d3d6d3
 
 BuildRequires:  libffi-devel
 BuildRequires:  xs-opam-repo
@@ -70,6 +70,9 @@ make install DESTDIR=%{buildroot} BINDIR=%{_bindir} SBINDIR=%{_sbindir}
 %systemd_postun xcp-networkd.service
 
 %changelog
+* Fri May 13 2022 Christian Lindig <christian.lindig@citrix.com> - 0.56.2-1
+- CA-359978 UPD-825: Flush IP addresses when switching from static to DHCP
+
 * Mon Sep 27 2021 Pau Ruiz Safont <pau.safont@citrix.com> - 0.56.1-3
 - Bump package after xs-opam update
 
