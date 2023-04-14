@@ -1,20 +1,17 @@
+%global package_speccommit b72f01fca88cfb46d071b36a8f5f35d116e3dceb
+%global package_srccommit v0.56.2
 Name:           xcp-networkd
-Version:        0.56.2
-Release:        1%{?dist}
+Version: 0.56.2
+Release: 2%{?xsrel}%{?dist}
 Summary:        Simple host network management service for the xapi toolstack
-License:        LGPL
+License:        LGPL-2.1-or-later WITH OCaml-LGPL-linking-exception
 URL:            https://github.com/xapi-project/xcp-networkd
-
-Source0: https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-networkd/archive?at=v0.56.2&format=tar.gz&prefix=xcp-networkd-0.56.2#/xcp-networkd-0.56.2.tar.gz
-Source1: SOURCES/xcp-networkd/xcp-networkd.service
-Source2: SOURCES/xcp-networkd/xcp-networkd-sysconfig
-Source3: SOURCES/xcp-networkd/xcp-networkd-conf
-Source4: SOURCES/xcp-networkd/xcp-networkd-network-conf
-Source5: SOURCES/xcp-networkd/init-xcp-networkd
-
-
-Provides: gitsha(https://code.citrite.net/rest/archive/latest/projects/XSU/repos/xcp-networkd/archive?at=v0.56.2&format=tar.gz&prefix=xcp-networkd-0.56.2#/xcp-networkd-0.56.2.tar.gz) = 80e49a2d646ff96f7e4e90688dbb3f7be2d3d6d3
-
+Source0: xcp-networkd-0.56.2.tar.gz
+Source1: xcp-networkd.service
+Source2: xcp-networkd-sysconfig
+Source3: xcp-networkd-conf
+Source4: xcp-networkd-network-conf
+Source5: init-xcp-networkd
 BuildRequires:  libffi-devel
 BuildRequires:  xs-opam-repo
 BuildRequires:  forkexecd-devel
@@ -70,6 +67,9 @@ make install DESTDIR=%{buildroot} BINDIR=%{_bindir} SBINDIR=%{_sbindir}
 %systemd_postun xcp-networkd.service
 
 %changelog
+* Tue Feb 28 2023 Pau Ruiz Safont <pau.ruizsafont@cloud.com> - 0.56.2-2
+- Change license to match the one in the source repo
+
 * Fri May 13 2022 Christian Lindig <christian.lindig@citrix.com> - 0.56.2-1
 - CA-359978 UPD-825: Flush IP addresses when switching from static to DHCP
 
