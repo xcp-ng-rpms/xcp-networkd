@@ -1,8 +1,8 @@
-%global package_speccommit dbeb23cfdeab78c9879bb132ed75f23a2eecefd0
+%global package_speccommit 7555fdd4eef0a9fbedfb21a3edb215267dfead9c
 %global package_srccommit v0.56.2
 Name:           xcp-networkd
 Version: 0.56.2
-Release: 15%{?xsrel}%{?dist}
+Release: 17%{?xsrel}%{?dist}
 Summary:        Simple host network management service for the xapi toolstack
 License:        LGPL-2.1-or-later WITH OCaml-LGPL-linking-exception
 URL:            https://github.com/xapi-project/xcp-networkd
@@ -67,6 +67,12 @@ make install DESTDIR=%{buildroot} BINDIR=%{_bindir} SBINDIR=%{_sbindir}
 %systemd_postun xcp-networkd.service
 
 %changelog
+* Thu Aug 29 2024 Christian Lindig <christian.lindig@cloud.com> - 0.56.2-17
+- Bump release and rebuild
+
+* Wed Jun 19 2024 Christian Lindig <christian.lindig@cloud.com> - 0.56.2-16
+- Bump release and rebuild
+
 * Fri Mar 08 2024 Christian Lindig <christian.lindig@cloud.com> - 0.56.2-15
 - Bump release and rebuild
 
